@@ -123,7 +123,7 @@ import (
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 	wasmtypes "github.com/CosmWasm/wasmd/x/wasm/types"
 
-	feeburnante "github.com/ChihuahuaChain/chihuahua/x/feeburn/ante"
+	customante "github.com/ChihuahuaChain/chihuahua/app/ante"
 
 	feeburnmodule "github.com/ChihuahuaChain/chihuahua/x/feeburn"
 	feeburnmodulekeeper "github.com/ChihuahuaChain/chihuahua/x/feeburn/keeper"
@@ -268,6 +268,7 @@ var (
 		ibcfeetypes.ModuleName:         nil,
 		icatypes.ModuleName:            nil,
 		wasm.ModuleName:                {authtypes.Burner},
+		feeburnmoduletypes.ModuleName:  {authtypes.Burner},
 	}
 )
 
@@ -538,6 +539,7 @@ func New(
 		keys[feeburnmoduletypes.StoreKey],
 		keys[feeburnmoduletypes.MemStoreKey],
 		app.GetSubspace(feeburnmoduletypes.ModuleName),
+		authtypes.NewModuleAddress(govtypes.ModuleName).String(),
 	)
 
 	// Create evidence Keeper for to register the IBC light client misbehaviour evidence route
@@ -744,8 +746,8 @@ func New(
 	app.SetInitChainer(app.InitChainer)
 	app.SetBeginBlocker(app.BeginBlocker)
 
-	anteHandler, err := feeburnante.NewAnteHandler(
-		feeburnante.HandlerOptions{
+	anteHandler, err := customante.NewAnteHandler(
+		customante.HandlerOptions{
 			HandlerOptions: ante.HandlerOptions{
 				AccountKeeper:   app.AccountKeeper,
 				BankKeeper:      app.BankKeeper,
