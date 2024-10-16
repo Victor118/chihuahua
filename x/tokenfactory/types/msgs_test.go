@@ -75,6 +75,9 @@ func TestMsgCreateDenom(t *testing.T) {
 		properMsg := *types.NewMsgCreateDenom(
 			addr1.String(),
 			"bitcoin",
+			nil,
+			0,
+			0,
 		)
 
 		return after(properMsg)

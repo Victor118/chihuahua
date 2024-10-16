@@ -23,6 +23,33 @@ func (k Keeper) CreateDenom(ctx sdk.Context, creatorAddr string, subdenom string
 	return denom, err
 }
 
+func (k Keeper) CreateStakingRewards(ctx sdk.Context, amount *sdk.Coin, startBlock int64, endBlock int64) error {
+	if amount != nil && startBlock > 0 && startBlock < endBlock && startBlock > ctx.BlockHeight() {
+
+		index, err := k.AirdropSequence.Next(ctx)
+		if err != nil {
+
+			return err
+		}
+		stakeDrop := types.StakingRewards{
+			Amount:     *amount,
+			StartBlock: startBlock,
+			EndBlock:   endBlock,
+		}
+
+		k.ActiveAirdrop.Set(ctx, index, stakeDrop)
+		//TEST
+		index, err = k.AirdropSequence.Next(ctx)
+		if err != nil {
+
+			return err
+		}
+		k.ActiveAirdrop.Set(ctx, index, stakeDrop)
+		//ctx.Logger().Error("TRYING TO INSERT ERROR " + err.Error())
+	}
+	return nil
+}
+
 // Runs CreateDenom logic after the charge and all denom validation has been handled.
 // Made into a second function for genesis initialization.
 func (k Keeper) createDenomAfterValidation(ctx sdk.Context, creatorAddr string, denom string) (err error) {

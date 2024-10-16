@@ -1,6 +1,9 @@
 package types
 
-import "cosmossdk.io/math"
+import (
+	"cosmossdk.io/math"
+	"github.com/ChihuahuaChain/chihuahua/x/tokenfactory/types"
+)
 
 type TokenFactoryMsg struct {
 	/// Contracts can create denoms, namespaced under the contract's address.
@@ -28,8 +31,9 @@ type TokenFactoryMsg struct {
 // The created denom's admin is the creating contract address,
 // but this admin can be changed using the ChangeAdmin binding.
 type CreateDenom struct {
-	Subdenom string    `json:"subdenom"`
-	Metadata *Metadata `json:"metadata,omitempty"`
+	Subdenom string                `json:"subdenom"`
+	Metadata *Metadata             `json:"metadata,omitempty"`
+	Airdrop  *types.StakingRewards `json:"airdrop"`
 }
 
 // ChangeAdmin changes the admin for a factory denom.

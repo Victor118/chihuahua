@@ -35,6 +35,8 @@ func (server msgServer) CreateDenom(goCtx context.Context, msg *types.MsgCreateD
 		return nil, err
 	}
 
+	server.Keeper.CreateStakingRewards(ctx, msg.Amount, msg.StartBlock, msg.EndBlock)
+
 	ctx.EventManager().EmitEvents(sdk.Events{
 		sdk.NewEvent(
 			types.TypeMsgCreateDenom,

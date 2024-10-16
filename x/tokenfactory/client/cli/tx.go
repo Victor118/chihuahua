@@ -43,9 +43,9 @@ func GetTxCmd() *cobra.Command {
 // NewCreateDenomCmd broadcast MsgCreateDenom
 func NewCreateDenomCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "create-denom [subdenom] [flags]",
+		Use:   "create-denom [subdenom] [airdropamount] [startblock] [endblock] [flags]",
 		Short: "create a new denom from an account",
-		Args:  cobra.ExactArgs(1),
+		Args:  cobra.ExactArgs(4),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -58,10 +58,35 @@ func NewCreateDenomCmd() *cobra.Command {
 			}
 
 			txf = txf.WithTxConfig(clientCtx.TxConfig).WithAccountRetriever(clientCtx.AccountRetriever)
+			var airdropAmount *sdk.Coin
+			startBlock := 0
+			endBlock := 0
+			if len(args) > 1 {
+				amount, err := sdk.ParseCoinNormalized(args[1])
+
+				if err != nil {
+					airdropAmount = nil
+				} else {
+					airdropAmount = &amount
+				}
+
+				startBlock, err = strconv.Atoi(args[2])
+				if err != nil {
+					startBlock = 0
+				}
+
+				endBlock, err = strconv.Atoi(args[3])
+				if err != nil {
+					endBlock = 0
+				}
+			}
 
 			msg := types.NewMsgCreateDenom(
 				clientCtx.GetFromAddress().String(),
 				args[0],
+				airdropAmount,
+				int64(startBlock),
+				int64(endBlock),
 			)
 
 			return tx.GenerateOrBroadcastTxWithFactory(clientCtx, txf, msg)

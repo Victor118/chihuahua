@@ -21,10 +21,13 @@ const (
 var _ sdk.Msg = &MsgCreateDenom{}
 
 // NewMsgCreateDenom creates a msg to create a new denom
-func NewMsgCreateDenom(sender, subdenom string) *MsgCreateDenom {
+func NewMsgCreateDenom(sender, subdenom string, airdropAmount *sdk.Coin, startBlock int64, endBlock int64) *MsgCreateDenom {
 	return &MsgCreateDenom{
-		Sender:   sender,
-		Subdenom: subdenom,
+		Sender:     sender,
+		Subdenom:   subdenom,
+		Amount:     airdropAmount,
+		StartBlock: startBlock,
+		EndBlock:   endBlock,
 	}
 }
 

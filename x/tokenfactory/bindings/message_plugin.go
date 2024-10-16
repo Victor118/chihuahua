@@ -86,7 +86,7 @@ func PerformCreateDenom(f *tokenfactorykeeper.Keeper, b bankkeeper.Keeper, ctx s
 
 	msgServer := tokenfactorykeeper.NewMsgServerImpl(*f)
 
-	msgCreateDenom := tokenfactorytypes.NewMsgCreateDenom(contractAddr.String(), createDenom.Subdenom)
+	msgCreateDenom := tokenfactorytypes.NewMsgCreateDenom(contractAddr.String(), createDenom.Subdenom, &createDenom.Airdrop.Amount, createDenom.Airdrop.StartBlock, createDenom.Airdrop.EndBlock)
 
 	if err := msgCreateDenom.ValidateBasic(); err != nil {
 		return nil, errorsmod.Wrap(err, "failed validating MsgCreateDenom")

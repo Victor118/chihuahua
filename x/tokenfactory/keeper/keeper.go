@@ -3,6 +3,7 @@ package keeper
 import (
 	"fmt"
 
+	"cosmossdk.io/core/store"
 	"cosmossdk.io/log"
 	"cosmossdk.io/store/prefix"
 	storetypes "cosmossdk.io/store/types"
@@ -10,14 +11,15 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
+	"cosmossdk.io/collections"
 	"github.com/ChihuahuaChain/chihuahua/x/tokenfactory/types"
 )
 
 type (
 	Keeper struct {
-		cdc      codec.BinaryCodec
-		storeKey storetypes.StoreKey
-
+		cdc                 codec.BinaryCodec
+		storeKey            storetypes.StoreKey
+		storeService        store.KVStoreService
 		accountKeeper       types.AccountKeeper
 		bankKeeper          types.BankKeeper
 		communityPoolKeeper types.CommunityPoolKeeper
@@ -26,32 +28,54 @@ type (
 
 		// the address capable of executing a MsgUpdateParams message. Typically, this
 		// should be the x/gov module account.
-		authority string
+		authority        string
+		AirdropSequence  collections.Sequence
+		ActiveAirdrop    collections.Map[uint64, types.StakingRewards]
+		FeeCollectorName string
 	}
+)
+
+var (
+	ActiveAirdropPrefix = collections.NewPrefix(10)
+	AirdropSequenceKey  = collections.NewPrefix(11)
 )
 
 // NewKeeper returns a new instance of the x/tokenfactory keeper
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey storetypes.StoreKey,
+	storeService store.KVStoreService,
 	accountKeeper types.AccountKeeper,
 	bankKeeper types.BankKeeper,
 	communityPoolKeeper types.CommunityPoolKeeper,
 	enabledCapabilities []string,
+	feeCollectorName string,
 	authority string,
 ) Keeper {
-	return Keeper{
-		cdc:      cdc,
-		storeKey: storeKey,
+	sb := collections.NewSchemaBuilder(storeService)
 
+	k := Keeper{
+		cdc:                 cdc,
+		storeKey:            storeKey,
+		storeService:        storeService,
 		accountKeeper:       accountKeeper,
 		bankKeeper:          bankKeeper,
 		communityPoolKeeper: communityPoolKeeper,
 
 		enabledCapabilities: enabledCapabilities,
 
-		authority: authority,
+		authority:        authority,
+		FeeCollectorName: feeCollectorName,
+		AirdropSequence:  collections.NewSequence(sb, AirdropSequenceKey, "airdrop_sequence"),
+		ActiveAirdrop:    collections.NewMap(sb, ActiveAirdropPrefix, "active_airdrop", collections.Uint64Key, codec.CollValue[types.StakingRewards](cdc)),
 	}
+
+	_, err := sb.Build()
+	if err != nil {
+		panic(err)
+	}
+	return k
+
 }
 
 // GetAuthority returns the x/mint module's authority.
