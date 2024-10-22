@@ -38,14 +38,6 @@ func (k Keeper) CreateStakingRewards(ctx sdk.Context, amount *sdk.Coin, startBlo
 		}
 
 		k.ActiveAirdrop.Set(ctx, index, stakeDrop)
-		//TEST
-		index, err = k.AirdropSequence.Next(ctx)
-		if err != nil {
-
-			return err
-		}
-		k.ActiveAirdrop.Set(ctx, index, stakeDrop)
-		//ctx.Logger().Error("TRYING TO INSERT ERROR " + err.Error())
 	}
 	return nil
 }

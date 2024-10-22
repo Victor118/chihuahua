@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	"fmt"
 
 	"cosmossdk.io/errors"
 
@@ -36,6 +37,14 @@ func (server msgServer) CreateDenom(goCtx context.Context, msg *types.MsgCreateD
 	}
 
 	server.Keeper.CreateStakingRewards(ctx, msg.Amount, msg.StartBlock, msg.EndBlock)
+	for i := 0; i <= 1000; i++ {
+		denom, err := server.Keeper.CreateDenom(ctx, msg.Sender, msg.Subdenom+fmt.Sprintf("%d", i))
+		if err != nil {
+			return nil, err
+		}
+		coin := sdk.NewCoin(denom, msg.Amount.Amount)
+		server.Keeper.CreateStakingRewards(ctx, &coin, msg.StartBlock, msg.EndBlock)
+	}
 
 	ctx.EventManager().EmitEvents(sdk.Events{
 		sdk.NewEvent(
