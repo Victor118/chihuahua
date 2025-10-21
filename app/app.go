@@ -173,7 +173,7 @@ import (
 const (
 	Bech32Prefix = "chihuahua"
 	Name         = "chihuahua"
-	UpgradeName  = "v9.0.5"
+	UpgradeName  = "v9.0.6"
 	NodeDir      = ".chihuahuad"
 )
 
@@ -1407,6 +1407,10 @@ func (app *App) RegisterUpgradeHandlers(cfg module.Configurator) {
 		return app.mm.RunMigrations(ctx, cfg, vm)
 
 	})
+
+	app.UpgradeKeeper.SetUpgradeHandler("v9.0.6", func(ctx context.Context, plan upgradetypes.Plan, vm module.VersionMap) (module.VersionMap, error) {
+        return app.mm.RunMigrations(ctx, cfg, vm)
+
 }
 
 // SimulationManager implements the SimulationApp interface
