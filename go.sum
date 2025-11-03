@@ -659,8 +659,8 @@ github.com/Azure/go-ansiterm v0.0.0-20230124172434-306776ec8161 h1:L/gRVlceqvL25
 github.com/Azure/go-ansiterm v0.0.0-20230124172434-306776ec8161/go.mod h1:xomTg63KZ2rFqZQzSB4Vz2SUXa1BpHTVz9L5PTmPC4E=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
-github.com/CosmWasm/wasmd v0.53.3 h1:kZkkSM2hf0Le7iJPLLNm0QTi2j+wiuLMMn7SyOqBiYw=
-github.com/CosmWasm/wasmd v0.53.3/go.mod h1:gP10E56tuToU5rsZR7vZLBL5ssW2mie6KN/WrQLG7/I=
+github.com/CosmWasm/wasmd v0.53.4 h1:yZq7xuWMxY9q5niD0HxOSyYSfHvATXgV3KI1IqkALKg=
+github.com/CosmWasm/wasmd v0.53.4/go.mod h1:zk6V7X9VPYAosyD6VMC+VaVsG33aTnmqDoIIFNkD31E=
 github.com/CosmWasm/wasmvm/v2 v2.2.4 h1:V3UwXJMA8TNOuQETppDQkaXAevF7gOWLYpKvrThPv7o=
 github.com/CosmWasm/wasmvm/v2 v2.2.4/go.mod h1:Aj/rB2KMRM8nAdbWxkO23rnQYb5KsoPuH9ZizSi0sVg=
 github.com/DataDog/datadog-go v3.2.0+incompatible h1:qSG2N4FghB1He/r2mFrWKCaL7dXCilEuNEeAn20fdD4=
@@ -807,8 +807,8 @@ github.com/cockroachdb/redact v1.1.6/go.mod h1:BVNblN9mBWFyMyqK1k3AAiSxhvhfK2oOZ
 github.com/cockroachdb/tokenbucket v0.0.0-20230807174530-cc333fc44b06 h1:zuQyyAKVxetITBuuhv3BI9cMrmStnpT18zmgmTxunpo=
 github.com/cockroachdb/tokenbucket v0.0.0-20230807174530-cc333fc44b06/go.mod h1:7nc4anLGjupUW/PeY5qiNYsdNXj7zopG+eqsS7To5IQ=
 github.com/codahale/hdrhistogram v0.0.0-20161010025455-3a0bb77429bd/go.mod h1:sE/e/2PUdi/liOCUjSTXgM1o87ZssimdTWN964YiIeI=
-github.com/cometbft/cometbft v0.38.17 h1:FkrQNbAjiFqXydeAO81FUzriL4Bz0abYxN/eOHrQGOk=
-github.com/cometbft/cometbft v0.38.17/go.mod h1:5l0SkgeLRXi6bBfQuevXjKqML1jjfJJlvI1Ulp02/o4=
+github.com/cometbft/cometbft v0.38.19 h1:vNdtCkvhuwUlrcLPAyigV7lQpmmo+tAq8CsB8gZjEYw=
+github.com/cometbft/cometbft v0.38.19/go.mod h1:UCu8dlHqvkAsmAFmWDRWNZJPlu6ya2fTWZlDrWsivwo=
 github.com/cometbft/cometbft-db v1.0.4 h1:cezb8yx/ZWcF124wqUtAFjAuDksS1y1yXedvtprUFxs=
 github.com/cometbft/cometbft-db v1.0.4/go.mod h1:M+BtHAGU2XLrpUxo3Nn1nOCcnVCiLM9yx5OuT0u5SCA=
 github.com/containerd/continuity v0.3.0 h1:nisirsYROK15TAMVukJOUyGJjz4BNQJBVsNvAXZJ/eg=
@@ -823,8 +823,8 @@ github.com/cosmos/cosmos-db v1.1.1 h1:FezFSU37AlBC8S98NlSagL76oqBRWq/prTPvFcEJNC
 github.com/cosmos/cosmos-db v1.1.1/go.mod h1:AghjcIPqdhSLP/2Z0yha5xPH3nLnskz81pBx3tcVSAw=
 github.com/cosmos/cosmos-proto v1.0.0-beta.5 h1:eNcayDLpip+zVLRLYafhzLvQlSmyab+RC5W7ZfmxJLA=
 github.com/cosmos/cosmos-proto v1.0.0-beta.5/go.mod h1:hQGLpiIUloJBMdQMMWb/4wRApmI9hjHH05nefC0Ojec=
-github.com/cosmos/cosmos-sdk v0.50.13 h1:xQ32hhzVy7agEe7behMdZN0ezWhPss3KoLZsF9KoBnw=
-github.com/cosmos/cosmos-sdk v0.50.13/go.mod h1:hrWEFMU1eoXqLJeE6VVESpJDQH67FS1nnMrQIjO2daw=
+github.com/cosmos/cosmos-sdk v0.50.14 h1:G8CtGHFWbExa+ZpVOVAb4kFmko/R30igsYOwyzRMtgY=
+github.com/cosmos/cosmos-sdk v0.50.14/go.mod h1:hrWEFMU1eoXqLJeE6VVESpJDQH67FS1nnMrQIjO2daw=
 github.com/cosmos/go-bip39 v1.0.0 h1:pcomnQdrdH22njcAatO0yWojsUnCO3y2tNoV1cb6hHY=
 github.com/cosmos/go-bip39 v1.0.0/go.mod h1:RNJv0H/pOIVgxw6KS7QeX2a0Uo0aKUlfhZ4xuwvCdJw=
 github.com/cosmos/gogogateway v1.2.0 h1:Ae/OivNhp8DqBi/sh2A8a1D0y638GpL3tkmLQAiKxTE=
